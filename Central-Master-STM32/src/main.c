@@ -1,10 +1,12 @@
-#include <zephyr/kernel.h>
-#include <zephyr/sys/printk.h>
+#include "benchmark_shared.h"
 
 int main(void)
 {
-	while (1) {
-		printk("Hello from the Blue Pill SPI Benchmark node!\n");
-		k_msleep(1000);
-	}
+#if defined(CONFIG_ROLE_WORKER)
+	return run_worker();
+#elif defined(CONFIG_ROLE_CHILD)
+	return run_child();
+#else
+#error "Either CONFIG_ROLE_WORKER or CONFIG_ROLE_CHILD must be selected"
+#endif
 }

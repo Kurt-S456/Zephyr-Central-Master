@@ -1,8 +1,19 @@
-# Copyright (c) 2023 Synopsys.
-#
 # SPDX-License-Identifier: Apache-2.0
 
-config SAMPLE_DO_OUTPUT
-	bool "Do print from the main thread which can be checked"
+menu "SPI Uptime Exchange"
+
+choice ROLE_SELECTION
+	prompt "Node role"
+	default ROLE_WORKER
+
+config ROLE_WORKER
+	bool "Worker (initiates SPI transfers)"
+
+config ROLE_CHILD
+	bool "Child (waits for worker clock)"
+
+endchoice
+
+endmenu
 
 source "Kconfig.zephyr"

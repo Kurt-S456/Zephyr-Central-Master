@@ -82,12 +82,42 @@ west build -b stm32_min_dev/stm32f103xb -p always
 
 ```
 
+#### Step A.1: Build Role-Specific Firmware (Worker/Child)
+
+Build two firmware variants from the same project:
+
+```fish
+cd Central-Master-STM32
+
+# Worker build (default build directory: build/)
+west build -b stm32_min_dev@blue/stm32f103xb -p always -- \
+	-DOVERLAY_CONFIG=controller.conf \
+	-DDTC_OVERLAY_FILE=boards/app_controller.overlay
+
+# Child build (separate build directory: build_target/)
+west build -b stm32_min_dev@blue/stm32f103xb -d build_target -p always -- \
+	-DOVERLAY_CONFIG=target.conf \
+	-DDTC_OVERLAY_FILE=boards/app_target.overlay
+
+```
+
 #### Step B: Flash the Microcontroller
 
 With the ST-Link V2 plugged into your computer, flash the target binary via OpenOCD:
 
 ```fish
 west flash
+
+```
+
+If you are flashing the role-specific builds, run:
+
+```fish
+# Flash worker firmware from build/
+west flash
+
+# Flash child firmware from build_target/
+west flash -d build_target
 
 ```
 
