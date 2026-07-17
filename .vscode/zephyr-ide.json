@@ -1,0 +1,30 @@
+{
+  "projects": {
+    "Central-Master-STM32": {
+      "rel_path": "Central-Master-STM32",
+      "name": "Central-Master-STM32",
+      "buildConfigs": {
+        "build/nucleo_f103rb/stm32f103xb": {
+          "relBoardSubDir": "st/nucleo_f103rb",
+          "board": "nucleo_f103rb/stm32f103xb",
+          "name": "build/nucleo_f103rb/stm32f103xb",
+          "compilerOptimization": "debug",
+          "westBuildArgs": [],
+          "westBuildCMakeArgs": [
+            "-DCONFIG_DEBUG_OPTIMIZATIONS=y",
+            "-DCONFIG_DEBUG_THREAD_INFO=y"
+          ],
+          "confFiles": {
+            "config": [],
+            "overlay": []
+          }
+        }
+      },
+      "twisterConfigs": {},
+      "confFiles": {
+        "config": [],
+        "overlay": []
+      }
+    }
+  }
+}
